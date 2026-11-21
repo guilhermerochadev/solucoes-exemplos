@@ -1,0 +1,37 @@
+
+quarkus:
+  application:
+    name: consumo-api-gravacao-base-quarkus
+
+  # Configuração Oracle
+  datasource:
+    db-kind: oracle
+    username: ${DB_USERNAME:oracle}
+    password: ${DB_PASSWORD:oracle}
+    jdbc:
+      url: ${DB_URL:jdbc:oracle:thin:@localhost:1521/app}
+
+  # Hibernate ORM
+  hibernate-orm:
+    schema-management:
+      strategy: validate
+    log:
+      sql: false
+
+  # Configuração REST Client
+  rest-client:
+    evento-produto-api:
+      url: ${EVENTO_PRODUTO_API_URL:http://localhost:3001}
+      scope: jakarta.inject.Singleton
+
+  # Logs
+  log:
+    level: INFO
+    category:
+      "br.com.exemplos":
+        level: INFO
+
+# Scheduler - Sincronização automática
+evento-produto:
+  scheduler:
+    interval: 1m
